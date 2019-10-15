@@ -1155,20 +1155,13 @@ class ReactImageLightbox extends Component {
       const originWidth = inMemoryImage.width;
       const originHeight = inMemoryImage.height;
 
-      
-
-      if (ReactImageLightbox.isIphone()) {
-        EXIF.getData(inMemoryImage, () => {
+      EXIF.getData(inMemoryImage, () => {
           const orientation = EXIF.getTag(inMemoryImage, 'Orientation');
           const [width, height] = ReactImageLightbox.getSizeByOrientation(originWidth, originHeight, orientation);
           
           this.saveImgCache(imageSrc, width, height);
           done();
         });
-      } else {
-        this.saveImgCache(imageSrc, originWidth, originHeight);
-        done();
-      }
     };
 
     inMemoryImage.src = imageSrc;
